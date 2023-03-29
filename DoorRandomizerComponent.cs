@@ -1,4 +1,5 @@
-﻿using Comfort.Common;
+﻿using BepInEx.Logging;
+using Comfort.Common;
 using EFT;
 using EFT.Interactive;
 using System;
@@ -8,32 +9,46 @@ namespace DrakiaXYZ_DoorRandomizer
 {
     internal class DoorRandomizerComponent : MonoBehaviour
     {
+        protected static ManualLogSource Logger { get; private set; }
+
+        private DoorRandomizerComponent()
+        {
+            if (Logger == null)
+            {
+                Logger = BepInEx.Logging.Logger.CreateLogSource(nameof(DoorRandomizerComponent));
+            }
+        }
+
         public void Awake()
         {
+            int doorCount = 0;
+            int changedCount = 0;
+            int incompatibleDoors = 0;
             FindObjectsOfType<Door>().ExecuteForEach(door =>
             {
+                doorCount++;
+
                 if (door.DoorState == EDoorState.Open || door.DoorState == EDoorState.Shut)
                 {
-                    // Check if any doors have an open/closed state, but also a lock
-                    if (!string.IsNullOrEmpty(door.KeyId))
-                    {
-                        Console.WriteLine($"Door has open/close state, but has a key! {door.name}");
-                    }
-
-                    // Randomly open/close doors
+                    // Have a 50% chance to change the initial state of the door
                     if (UnityEngine.Random.Range(0, 100) < 50)
                     {
-                        door.DoorState = EDoorState.Open;
-                    }
-                    else
-                    {
-                        door.DoorState = EDoorState.Shut;
-                    }
+                        changedCount++;
+                        door.DoorState = (door.InitialDoorState == EDoorState.Open ? EDoorState.Shut : EDoorState.Open);
 
-                    // Trigger "OnEnable" to make sure the properties are set correctly for interaction
-                    door.OnEnable();
+                        // Trigger "OnEnable" to make sure the properties are set correctly for interaction
+                        door.OnEnable();
+                    }
+                }
+                else
+                {
+                    incompatibleDoors++;
                 }
             });
+
+            Logger.LogDebug($"Total Doors: {doorCount}");
+            Logger.LogDebug($"Changed Doors: {changedCount}");
+            Logger.LogDebug($"Incompatible Doors: {incompatibleDoors}");
         }
 
         public static void Enable()
