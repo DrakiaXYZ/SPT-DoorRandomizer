@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DrakiaXYZ_DoorRandomizer
 {
-    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "0.0.1")]
+    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "0.0.2")]
     public class DoorRandomizerPlugin : BaseUnityPlugin
     {
         private void Awake()
