@@ -43,6 +43,15 @@ namespace DrakiaXYZ_DoorRandomizer
                     return;
                 }
 
+                // BSG disables some doors by disabling the child Push/Pull elements, don't toggle those
+                Transform pushTransform = door.transform.Find("Push");
+                Transform pullTransform = door.transform.Find("Pull");
+                if (pushTransform == null || pullTransform == null || !pushTransform.gameObject.activeInHierarchy || !pullTransform.gameObject.activeInHierarchy)
+                {
+                    inoperableCount++;
+                    return;
+                }
+
                 // Have a 50% chance to change the initial state of the door
                 if (UnityEngine.Random.Range(0, 100) < 50)
                 {
