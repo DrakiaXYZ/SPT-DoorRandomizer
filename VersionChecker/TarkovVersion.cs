@@ -32,7 +32,6 @@ namespace DrakiaXYZ.Waypoints.VersionChecker
             int buildVersion = BuildVersion;
             if (currentVersion != buildVersion)
             {
-                EFT.UI.ConsoleScreen.LogError($"ERROR: This version of {Info.Metadata.Name} v{Info.Metadata.Version} was built for Tarkov {buildVersion}, but you are running {currentVersion}. Please download the correct plugin version.");
                 Logger.LogError($"ERROR: This version of {Info.Metadata.Name} v{Info.Metadata.Version} was built for Tarkov {buildVersion}, but you are running {currentVersion}. Please download the correct plugin version.");
                 return false;
             }
