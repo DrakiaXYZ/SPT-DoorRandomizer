@@ -1,25 +1,29 @@
 ﻿using Aki.Reflection.Patching;
 using BepInEx;
+using DrakiaXYZ.Waypoints.VersionChecker;
 using EFT;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace DrakiaXYZ_DoorRandomizer
 {
-    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "1.0.1")]
+    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "1.0.2")]
     public class DoorRandomizerPlugin : BaseUnityPlugin
     {
+        public static int interactiveLayer;
+
         private void Awake()
         {
+            if (!TarkovVersion.CheckEftVersion(Logger, Info))
+            {
+                throw new Exception($"Invalid EFT Version");
+            }
+
             new DoorRandomizerPatch().Enable();
         }
     }
 
-    // I'm lazy, so we have patch class here
     internal class DoorRandomizerPatch : ModulePatch
     {
         protected override MethodBase GetTargetMethod()
@@ -30,6 +34,9 @@ namespace DrakiaXYZ_DoorRandomizer
         [PatchPrefix]
         public static void PatchPrefix()
         {
+            // I don't know if the layer names can change between scenes, so to be safe, get the layer number on raid start
+            DoorRandomizerPlugin.interactiveLayer = LayerMask.NameToLayer("Interactive");
+
             DoorRandomizerComponent.Enable();
         }
     }

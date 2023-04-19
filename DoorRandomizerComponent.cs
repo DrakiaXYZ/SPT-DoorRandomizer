@@ -25,6 +25,8 @@ namespace DrakiaXYZ_DoorRandomizer
             int changedCount = 0;
             int invalidStateCount = 0;
             int inoperableCount = 0;
+            int invalidLayerCount = 0;
+
             FindObjectsOfType<Door>().ExecuteForEach(door =>
             {
                 doorCount++;
@@ -43,12 +45,10 @@ namespace DrakiaXYZ_DoorRandomizer
                     return;
                 }
 
-                // BSG disables some doors by disabling the child Push/Pull elements, don't toggle those
-                Transform pushTransform = door.transform.Find("Push");
-                Transform pullTransform = door.transform.Find("Pull");
-                if (pushTransform == null || pullTransform == null || !pushTransform.gameObject.activeInHierarchy || !pullTransform.gameObject.activeInHierarchy)
+                // We don't support doors that aren't on the "Interactive" layer
+                if (door.gameObject.layer != DoorRandomizerPlugin.interactiveLayer)
                 {
-                    inoperableCount++;
+                    invalidLayerCount++;
                     return;
                 }
 
@@ -67,6 +67,7 @@ namespace DrakiaXYZ_DoorRandomizer
             Logger.LogDebug($"Changed Doors: {changedCount}");
             Logger.LogDebug($"Invalid State Doors: {invalidStateCount}");
             Logger.LogDebug($"Inoperable Doors: {inoperableCount}");
+            Logger.LogDebug($"Invalid Layer Doors: {invalidLayerCount}");
         }
 
         public static void Enable()
