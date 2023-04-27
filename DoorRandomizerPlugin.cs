@@ -15,7 +15,7 @@ namespace DrakiaXYZ_DoorRandomizer
 
         private void Awake()
         {
-            if (!TarkovVersion.CheckEftVersion(Logger, Info))
+            if (!TarkovVersion.CheckEftVersion(Logger, Info, Config))
             {
                 throw new Exception($"Invalid EFT Version");
             }
