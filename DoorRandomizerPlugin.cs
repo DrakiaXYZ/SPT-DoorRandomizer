@@ -1,14 +1,14 @@
 ﻿using Aki.Reflection.Patching;
 using BepInEx;
-using DrakiaXYZ.Waypoints.VersionChecker;
+using DrakiaXYZ.DoorRandomizer.VersionChecker;
 using EFT;
 using System;
 using System.Reflection;
 using UnityEngine;
 
-namespace DrakiaXYZ_DoorRandomizer
+namespace DrakiaXYZ.DoorRandomizer
 {
-    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "1.0.2")]
+    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "1.0.3")]
     public class DoorRandomizerPlugin : BaseUnityPlugin
     {
         public static int interactiveLayer;

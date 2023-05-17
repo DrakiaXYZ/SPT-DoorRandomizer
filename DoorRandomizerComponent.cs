@@ -2,10 +2,9 @@
 using Comfort.Common;
 using EFT;
 using EFT.Interactive;
-using System;
 using UnityEngine;
 
-namespace DrakiaXYZ_DoorRandomizer
+namespace DrakiaXYZ.DoorRandomizer
 {
     internal class DoorRandomizerComponent : MonoBehaviour
     {

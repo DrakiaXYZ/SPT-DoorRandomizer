@@ -7,10 +7,10 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace DrakiaXYZ.Waypoints.VersionChecker
+namespace DrakiaXYZ.DoorRandomizer.VersionChecker
 {
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
-    public class TarkovVersion : Attribute
+    internal class TarkovVersion : Attribute
     {
         private int version;
         public TarkovVersion() : this(0) { }
