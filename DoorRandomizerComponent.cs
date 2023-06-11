@@ -38,14 +38,14 @@ namespace DrakiaXYZ.DoorRandomizer
                 }
 
                 // We don't support non-operatable doors
-                if (!door.Operatable)
+                if (!door.Operatable || !door.enabled)
                 {
                     inoperableCount++;
                     return;
                 }
 
                 // We don't support doors that aren't on the "Interactive" layer
-                if (door.gameObject.layer != DoorRandomizerPlugin.interactiveLayer)
+                if (door.gameObject.layer != LayerMaskClass.InteractiveLayer)
                 {
                     invalidLayerCount++;
                     return;

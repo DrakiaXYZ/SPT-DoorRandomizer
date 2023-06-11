@@ -8,11 +8,9 @@ using UnityEngine;
 
 namespace DrakiaXYZ.DoorRandomizer
 {
-    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "1.0.4")]
+    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "1.0.5")]
     public class DoorRandomizerPlugin : BaseUnityPlugin
     {
-        public static int interactiveLayer;
-
         private void Awake()
         {
             if (!TarkovVersion.CheckEftVersion(Logger, Info, Config))
@@ -34,9 +32,6 @@ namespace DrakiaXYZ.DoorRandomizer
         [PatchPrefix]
         public static void PatchPrefix()
         {
-            // I don't know if the layer names can change between scenes, so to be safe, get the layer number on raid start
-            DoorRandomizerPlugin.interactiveLayer = LayerMask.NameToLayer("Interactive");
-
             DoorRandomizerComponent.Enable();
         }
     }
