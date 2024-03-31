@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace DrakiaXYZ.DoorRandomizer
 {
-    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "1.2.1")]
+    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "1.3.0")]
     public class DoorRandomizerPlugin : BaseUnityPlugin
     {
         private void Awake()
