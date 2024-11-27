@@ -7,8 +7,8 @@ using System.Reflection;
 
 namespace DrakiaXYZ.DoorRandomizer
 {
-    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "1.4.0")]
-    [BepInDependency("com.SPT.core", "3.9.0")]
+    [BepInPlugin("xyz.drakia.doorrandomizer", "DrakiaXYZ-DoorRandomizer", "1.5.0")]
+    [BepInDependency("com.SPT.core", "3.10.0")]
     public class DoorRandomizerPlugin : BaseUnityPlugin
     {
         private void Awake()
